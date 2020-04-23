@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {
   Menu,
@@ -12,9 +12,11 @@ import {
 import { setAuthUser } from '../actions/authUser';
 
 class Nav extends Component {
+
   handleLogout = e => {
     e.preventDefault();
     this.props.setAuthUser(null);
+    this.props.history.push('/');
   };
 
   render() {
@@ -140,7 +142,7 @@ function mapStateToProps({ users, authUser }) {
   };
 }
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   { setAuthUser }
-)(Nav);
+)(Nav));
