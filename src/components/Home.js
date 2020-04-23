@@ -31,7 +31,47 @@ export class Home extends Component {
 const panes = props => {
     const { userQuestionData } = props;
 
-    return []
+    return [
+        {
+            menuItem: 'Unanswered',
+            render: () => (
+                <Tab.Pane>
+                    {userQuestionData.answered.map(question => (
+                        <p>Placeholder unanswered</p>
+                    ))}
+                </Tab.Pane>
+            )
+        },
+        {
+            menuItem: 'Answered',
+            render: () => (
+                <Tab.Pane>
+                    {userQuestionData.unanswered.map(question => (
+                        <p>Placeholder answered</p>
+                    ))}
+                </Tab.Pane>
+            )
+        }
+    ]
 }
 
-export default Home
+function mapeStateToProps({ authUser, users, questions }) {
+    const answeredIDs = Object.keys(users[authUser].answers)
+
+    const answered = Object.values(questions)
+                            .filter(question => answeredIDs.includes(question.id))
+                            .sort((a, b) => b.timestamp - a.timestamp)
+    const unanswered = Object.values(questions)
+                            .filter(question => !answeredIDs.includes(question.id))
+                            .sort((a, b) => b.timestamp - a.timestamp)
+
+    return {
+        userQuestionData: {
+            answered,
+            unanswered
+        }
+    }
+
+}
+
+export default connect(mapeStateToProps)(Home)  
