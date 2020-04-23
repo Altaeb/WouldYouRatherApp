@@ -29,10 +29,13 @@ class App extends Component {
                   </Content>
                 )}
               />
-
-
             ) : (
-              <Fragment></Fragment>
+              <Fragment>
+              <Nav />
+              <Content>
+                <Route exact path='/' />
+              </Content>
+            </Fragment>
 
           )}
         </div>
