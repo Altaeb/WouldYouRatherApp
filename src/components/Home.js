@@ -5,24 +5,14 @@ import { Tab } from 'semantic-ui-react';
 import UserCard from './UserCard';
 import QuestionTeaser from './QuestionTeaser';
 
-const color = {
-    green: {
-      name: 'green',
-      hex: '#21ba45'
-    },
-    blue: {
-      name: 'blue',
-      hex: '#2185d0'
-    }
-  };
-
 export class Home extends Component {
+
     static propTypes = {
         userQuestionData: PropTypes.object.isRequired
       };
+
       render() {
         const { userQuestionData } = this.props;
-
         return <Tab panes={panes({ userQuestionData })} className="tab" />;
     }
 
@@ -37,15 +27,9 @@ const panes = props => {
             {userQuestionData.answered.map(question => (
               <UserCard
                 key={question.id}
-                userId={question.author}
-                color={color.green.hex}
-              >
-                <QuestionTeaser
-                  question={question}
-                  unanswered={true}
-                  color={color.green.name}
-                />
-              </UserCard>
+                question_id={question.id}
+                unanswered={true}
+              />
             ))}
           </Tab.Pane>
         )
@@ -57,15 +41,9 @@ const panes = props => {
             {userQuestionData.unanswered.map(question => (
               <UserCard
                 key={question.id}
-                userId={question.author}
-                color={color.blue.hex}
-              >
-                <QuestionTeaser
-                  question={question}
-                  unanswered={false}
-                  color={color.blue.name}
-                />
-              </UserCard>
+                question_id={question.id}
+                unanswered={false}
+              />
             ))}
           </Tab.Pane>
         )

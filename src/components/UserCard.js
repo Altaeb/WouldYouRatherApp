@@ -8,6 +8,9 @@ import {
     Image 
 } from 'semantic-ui-react';
 
+import { colors } from '../utils/helpers'
+import QuestionTeaser from './QuestionTeaser';
+
 export class UserCard extends Component {
 
     static propTypes = {
