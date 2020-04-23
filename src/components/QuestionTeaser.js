@@ -6,24 +6,33 @@ import {
     Button
 } from 'semantic-ui-react';
 
+import { colors } from '../utils/helpers'
+
 export class QuestionTeaser extends Component {
+
     static propTypes = {
         question: PropTypes.object.isRequired,
         unanswered: PropTypes.bool.isRequired,
         color: PropTypes.string
       };
+
       state = {
         viewPoll: false
       };
+
       handleClick = e => {
         this.setState(prevState => ({
           viewPoll: !prevState.viewPoll
         }));
       };
-      render() {
-        const { question, unanswered, color } = this.props;
 
-        if (this.state.viewPoll === true) {
+      render() {
+
+        const { question, unanswered, color } = this.props;
+        // const buttonColor = unanswered === true ? colors 
+
+        
+       if (this.state.viewPoll === true) {
             return <Redirect push to={`/questions/${question.id}`} />;
     }
     return (
