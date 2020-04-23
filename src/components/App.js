@@ -7,6 +7,7 @@ import { Grid } from 'semantic-ui-react'
 
 import Login from './Login'
 import Nav from './Nav';
+import Home from './Home';
 
 class App extends Component {
 
@@ -34,6 +35,7 @@ class App extends Component {
               <Nav />
               <Content>
                 <Route exact path='/' />
+                <Route exact path='/' component={Home} />
               </Content>
             </Fragment>
 
