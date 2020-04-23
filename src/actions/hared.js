@@ -8,7 +8,6 @@ export function handleInitialData() {
             ({users, questions}) => {
                 dispatch(receiveUsers(users))
                 dispatch(receiveQuestions(questions))
-            }
-        )
+            })
     }
 }
