@@ -11,7 +11,7 @@ import {
 export class UserCard extends Component {
 
     static propTypes = {
-        userId: this.propTypes.string.isRequired,
+        userId: PropTypes.string.isRequired,
         color: PropTypes.string
     }
 
