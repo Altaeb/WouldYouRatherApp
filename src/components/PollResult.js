@@ -14,12 +14,7 @@ import { styles } from '../utils/helpers';
 
 const YourVoteLabel = () => (
   <Label color="orange" ribbon="right" className="vote">
-    <Icon name="check circle outline" size="big" className="compact" />
-    <div style={{ float: 'right' }}>
-      Your
-      <br />
-      Vote
-    </div>
+     <Icon name="check circle outline" size="big" className="compact" style={{margin: '0px'}} />
   </Label>
 );
 
@@ -34,7 +29,7 @@ export class PollResult extends Component {
   };
 
   render() {
-    // console.log('this.props', this.props);
+
     const { question, user } = this.props;
     const optionOneVotes = question.optionOne.votes.length;
     const optionTwoVotes = question.optionTwo.votes.length;
@@ -54,7 +49,6 @@ export class PollResult extends Component {
         <Header as="h3">
           Results:
           <Header.Subheader style={{ fontWeight: 'bold' }}>
-            Would you rather
           </Header.Subheader>
         </Header>
         <Segment
@@ -86,11 +80,9 @@ export class PollResult extends Component {
             {optionTwoVotes} out of {votesTotal} votes
           </Progress>
         </Segment>
-        {/* <Form.Field> */}
         <Button size="tiny" floated="right" onClick={this.handleClick}>
           Back
         </Button>
-        {/* </Form.Field> */}
       </Fragment>
     );
   }

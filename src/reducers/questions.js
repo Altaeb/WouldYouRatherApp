@@ -1,6 +1,7 @@
 import {
     RECEIVE_QUESTIONS,
-    ADD_ANSWER_TO_QUESTION
+    ADD_ANSWER_TO_QUESTION,
+    ADD_QUESTION
   } from '../actions/questions';
   
   export default function questions(state = {}, action) {
@@ -12,7 +13,6 @@ import {
         };
       case ADD_ANSWER_TO_QUESTION:
         const { authUser, qid, answer } = action;
-        // console.log('question reducer state', state);
   
         return {
           ...state,
@@ -24,6 +24,13 @@ import {
             }
           }
         };
+        case ADD_QUESTION:
+            const { question } = action;
+      
+            return {
+              ...state,
+              [question.id]: question
+            };
       default:
         return state;
     }

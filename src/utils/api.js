@@ -19,6 +19,5 @@ export function getInitialData() {
 }
 
 export function saveQuestionAnswer(authUser, qid, answer) {
-  // console.log('info', { authUser, qid, answer });
   return _saveQuestionAnswer({ authUser, qid, answer });
 }

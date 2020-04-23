@@ -1,4 +1,8 @@
-import { RECEIVE_USERS, ADD_ANSWER_TO_USER } from '../actions/users';
+import { 
+    RECEIVE_USERS, 
+    ADD_ANSWER_TO_USER,
+    ADD_QUESTION_TO_USER
+   } from '../actions/users';
 
 export default function users(state = {}, action) {
   switch (action.type) {
@@ -9,8 +13,6 @@ export default function users(state = {}, action) {
       };
     case ADD_ANSWER_TO_USER:
       const { authUser, qid, answer } = action;
-      // console.log('user reducer state', state);
-
       return {
         ...state,
         [authUser]: {
@@ -21,6 +23,16 @@ export default function users(state = {}, action) {
           }
         }
       };
+      case ADD_QUESTION_TO_USER:
+        const { author, id } = action;
+  
+        return {
+          ...state,
+          [author]: {
+            ...state[author],
+            questions: state[author].questions.concat(id)
+          }
+        };
     default:
       return state;
   }
