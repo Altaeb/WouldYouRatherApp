@@ -3,69 +3,70 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Tab } from 'semantic-ui-react';
 import UserCard from './UserCard';
-import QuestionTeaser from './QuestionTeaser';
 
 export class Home extends Component {
-
-    static propTypes = {
-        userQuestionData: PropTypes.object.isRequired
-      };
-
-      render() {
-        const { userQuestionData } = this.props;
-        return <Tab panes={panes({ userQuestionData })} className="tab" />;
-    }
-
-}
-const panes = props => {
-    const { userQuestionData } = props;
-    return [
-      {
-        menuItem: 'Unanswered',
-        render: () => (
-          <Tab.Pane>
-            {userQuestionData.answered.map(question => (
-              <UserCard
-                key={question.id}
-                question_id={question.id}
-                unanswered={true}
-              />
-            ))}
-          </Tab.Pane>
-        )
-      },
-      {
-        menuItem: 'Answered',
-        render: () => (
-          <Tab.Pane>
-            {userQuestionData.unanswered.map(question => (
-              <UserCard
-                key={question.id}
-                question_id={question.id}
-                unanswered={false}
-              />
-            ))}
-          </Tab.Pane>
-        )
-      }
-    ];
+  static propTypes = {
+    userQuestionData: PropTypes.object.isRequired
   };
-  
-  function mapStateToProps({ authUser, users, questions }) {
-    const answeredIds = Object.keys(users[authUser].answers);
-    const answered = Object.values(questions)
-      .filter(question => answeredIds.includes(question.id))
-      .sort((a, b) => b.timestamp - a.timestamp);
-    const unanswered = Object.values(questions)
-      .filter(question => !answeredIds.includes(question.id))
-      .sort((a, b) => b.timestamp - a.timestamp);
+  render() {
+    const { userQuestionData } = this.props;
 
-      return {
-        userQuestionData: {
-          answered,
-          unanswered
-    }
-    };
+    return <Tab panes={panes({ userQuestionData })} className="tab" />;
+  }
 }
 
-export default connect(mapStateToProps)(Home); 
+const panes = props => {
+  const { userQuestionData } = props;
+  return [
+    {
+      menuItem: 'Unanswered',
+      render: () => (
+        <Tab.Pane>
+          {userQuestionData.answered.map(question => (
+            <UserCard
+              key={question.id}
+              question_id={question.id}
+              unanswered={true}
+            />
+          ))}
+        </Tab.Pane>
+      )
+    },
+    {
+      menuItem: 'Answered',
+      render: () => (
+        <Tab.Pane>
+          {userQuestionData.unanswered.map(question => (
+            <UserCard
+              key={question.id}
+              question_id={question.id}
+              unanswered={false}
+            />
+          ))}
+        </Tab.Pane>
+      )
+    }
+  ];
+};
+
+function mapStateToProps({ authUser, users, questions }) {
+  const answeredIds = Object.keys(users[authUser].answers);
+  const answered = Object.values(questions)
+    .filter(question => !answeredIds.includes(question.id))
+    .sort((a, b) => b.timestamp - a.timestamp);
+  const unanswered = Object.values(questions)
+    .filter(question => answeredIds.includes(question.id))
+    .sort((a, b) => b.timestamp - a.timestamp);
+  // console.log('answeredIds', answeredIds);
+  // console.log('answeredQuestions', answeredQuestions);
+  // console.log('unansweredQuestions', unansweredQuestions);
+
+  return {
+    userQuestionData: {
+      answered,
+      unanswered
+    }
+  };
+}
+
+export default connect(mapStateToProps)(Home);
